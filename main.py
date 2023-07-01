@@ -12,13 +12,14 @@ app = typer.Typer()
 def add_user(
         name: Annotated[str, typer.Option("--name", "-n")],
         email: Annotated[str, typer.Option("--email", "-e")],
-        github_user: Annotated[str, typer.Option("--github-user", "-gh")]):
+        github_user: Annotated[str, typer.Option("--github-user", "-gh")],
+        ssh_key: Annotated[str, typer.Option("--ssh-key", "-sk")]):
     with open('users.json', 'r+') as f:
         github_users = json.load(f)
-
         if github_users.get(github_user) is not None:
             print(f'User with the {github_user} github name already exists. overriding with new values...')
-        github_users[github_user] = {name: name, email: email}
+        #TODO: add ssh key validity
+        github_users[github_user] = {name: name, email: email, ssh_key: ssh_key}
         f.seek(0)
         json.dump(github_users, f, indent=4)
 
