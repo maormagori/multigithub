@@ -16,6 +16,7 @@ def add_user(
         ssh_key: Annotated[str, typer.Option("--ssh-key", "-sk")]):
     with open('users.json', 'r+') as f:
         github_users = json.load(f)
+        # TODO: validate users file
         if github_users.get(github_user) is not None:
             print(f'User with the {github_user} github name already exists. overriding with new values...')
         # TODO: add ssh key validity
