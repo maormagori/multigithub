@@ -18,7 +18,8 @@ def add_user(
         github_users = json.load(f)
         if github_users.get(github_user) is not None:
             print(f'User with the {github_user} github name already exists. overriding with new values...')
-        #TODO: add ssh key validity
+        # TODO: add ssh key validity
+        # TODO: add questioning to acquire missing info
         github_users[github_user] = {name: name, email: email, ssh_key: ssh_key}
         f.seek(0)
         json.dump(github_users, f, indent=4)
